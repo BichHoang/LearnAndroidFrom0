@@ -54,7 +54,7 @@
                     android:id="@+id/seekBar_bee"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:max="500"
+                    android:max="1000"
                     android:progress="5"
                     android:thumb="@drawable/bee" />
             </LinearLayout>
@@ -73,7 +73,7 @@
                     android:id="@+id/seekBar_bird"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:max="500"
+                    android:max="1000"
                     android:progress="5"
                     android:thumb="@drawable/bird" />
             </LinearLayout>
@@ -92,7 +92,7 @@
                     android:id="@+id/seekBar_elephant"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:max="500"
+                    android:max="1000"
                     android:progress="5"
                     android:thumb="@drawable/elephant" />
             </LinearLayout>
@@ -111,6 +111,7 @@
         android:id="@+id/imageView_count"
         android:src="@drawable/three"
         android:layout_gravity="center"
+        android:background="@null"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </FrameLayout>

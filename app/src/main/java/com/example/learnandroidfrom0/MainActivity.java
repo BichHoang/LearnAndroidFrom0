@@ -1,7 +1,9 @@
 package com.example.learnandroidfrom0;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -21,8 +23,9 @@ public class MainActivity extends AppCompatActivity {
     ImageButton btnPlay;
     LinearLayout layout_main;
     ImageView imageView_count;
-    boolean isOver = false;
+    boolean isOver, isWin = false;
     int count = 3;
+    String message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +35,16 @@ public class MainActivity extends AppCompatActivity {
         mapping();
         layout_main.setVisibility(LinearLayout.GONE);
         imageView_count.setVisibility(View.GONE);
+        seekBar_bee.setEnabled(false);
+        seekBar_bird.setEnabled(false);
+        seekBar_elephant.setEnabled(false);
 
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnPlay.setVisibility(View.INVISIBLE);
                 layout_main.setVisibility(LinearLayout.VISIBLE);
-                btnPlay.setVisibility(View.GONE);
+                setEnableCheckbox(true);
             }
         });
 
@@ -47,8 +54,9 @@ public class MainActivity extends AppCompatActivity {
                 if(isChecked){
                     checkBox_bird.setChecked(false);
                     checkBox_elephant.setChecked(false);
+                    setEnableCheckbox(false);
+                    imageViewCount(1);
                 }
-                imageViewCount();
             }
         });
 
@@ -58,8 +66,9 @@ public class MainActivity extends AppCompatActivity {
                 if(isChecked){
                     checkBox_bee.setChecked(false);
                     checkBox_elephant.setChecked(false);
+                    setEnableCheckbox(false);
+                    imageViewCount(2);
                 }
-                imageViewCount();
             }
         });
 
@@ -69,8 +78,9 @@ public class MainActivity extends AppCompatActivity {
                 if(isChecked){
                     checkBox_bee.setChecked(false);
                     checkBox_bird.setChecked(false);
+                    setEnableCheckbox(false);
+                    imageViewCount(3);
                 }
-                imageViewCount();
             }
         });
     }
@@ -87,18 +97,37 @@ public class MainActivity extends AppCompatActivity {
         imageView_count = findViewById(R.id.imageView_count);
     }
 
-    public void play(){
-        CountDownTimer countDownTimer = new CountDownTimer(300, 300) {
+    public void play(final int choise){
+        CountDownTimer countDownTimer = new CountDownTimer(150, 150) {
             @Override
             public void onTick(long millisUntilFinished) {
                 Random random = new Random();
                 int max_race = seekBar_bee.getMax();
-                if((seekBar_bee.getProgress() >= max_race) || (seekBar_bird.getProgress() >= max_race) || seekBar_elephant.getProgress() >= max_race){
+                if (seekBar_bee.getProgress() >= max_race){
                     isOver = true;
+                    if (choise == 1){
+                        isWin = true;
+                    }
+                    message = "Bee";
                 }
-                seekBar_bee.setProgress(seekBar_bee.getProgress() + random.nextInt(20) + 1);
-                seekBar_bird.setProgress(seekBar_bird.getProgress() +random.nextInt(20) + 1);
-                seekBar_elephant.setProgress(seekBar_elephant.getProgress() + random.nextInt(20) + 1);
+                if (seekBar_bird.getProgress() >= max_race){
+                    isOver = true;
+                    if (choise == 2){
+                        isWin = true;
+                    }
+                    message = "Bird";
+                }
+                if (seekBar_elephant.getProgress() >= max_race){
+                    isOver = true;
+                    if (choise == 3){
+                        isWin = true;
+                    }
+                    message = "Elephant";
+                }
+
+                seekBar_bee.setProgress(seekBar_bee.getProgress() + random.nextInt(50));
+                seekBar_bird.setProgress(seekBar_bird.getProgress() +random.nextInt(50));
+                seekBar_elephant.setProgress(seekBar_elephant.getProgress() + random.nextInt(50));
             }
 
             @Override
@@ -106,13 +135,29 @@ public class MainActivity extends AppCompatActivity {
                 if(!isOver){
                     this.start();
                 }else{
-                    Toast.makeText(MainActivity.this, "Game over", Toast.LENGTH_SHORT).show();
+                    AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+                    if(isWin){
+                        alertDialog.setTitle("You Won");
+                    }else{
+                        alertDialog.setTitle("Game Over");
+                    }
+
+                    alertDialog.setMessage(message + " is the winner");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    btnPlay.setVisibility(View.VISIBLE);
+                                    reset();
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
                 }
             }
         }.start();
     }
 
-    public void imageViewCount(){
+    public void imageViewCount(final int choise){
         imageView_count.setVisibility(View.VISIBLE);
 
         CountDownTimer countDownTimer = new CountDownTimer(4000, 1000) {
@@ -140,8 +185,28 @@ public class MainActivity extends AppCompatActivity {
             public void onFinish() {
                 imageView_count.setImageResource(R.drawable.three);
                 imageView_count.setVisibility(View.INVISIBLE);
-                play();
+                play(choise);
             }
         }.start();
+    }
+
+    public  void reset(){
+        seekBar_bee.setProgress(5);
+        seekBar_bird.setProgress(5);
+        seekBar_elephant.setProgress(5);
+        checkBox_bee.setChecked(false);
+        checkBox_bird.setChecked(false);
+        checkBox_elephant.setChecked(false);
+        isOver = false;
+        isWin = false;
+        count = 3;
+        imageView_count.setVisibility(View.INVISIBLE);
+        setEnableCheckbox(false);
+    }
+
+    public void setEnableCheckbox(boolean setCheck){
+        checkBox_elephant.setEnabled(setCheck);
+        checkBox_bird.setEnabled(setCheck);
+        checkBox_bee.setEnabled(setCheck);
     }
 }
