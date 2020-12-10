@@ -1,26 +1,20 @@
 package com.example.learnandroidfrom0;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.MotionEventCompat;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
-import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements
+import androidx.appcompat.app.AppCompatActivity;
+
+public class EventActivity extends AppCompatActivity implements
         SimpleGestureFilter.SimpleGestureListener {
 
     private SimpleGestureFilter detector;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_main);
-
-        // Detect touched area
-        detector = new SimpleGestureFilter(MainActivity.this, this);
+        setContentView(R.layout.layout_event);
     }
 
     @Override
@@ -34,11 +28,11 @@ public class MainActivity extends AppCompatActivity implements
     public void onSwipe(int direction) {
         switch (direction) {
             case SimpleGestureFilter.SWIPE_RIGHT:
-                Intent intent = new Intent(MainActivity.this, DiaryActivity.class);
+                Intent intent = new Intent(EventActivity.this, MainActivity.class);
                 startActivity(intent);
                 break;
             case SimpleGestureFilter.SWIPE_LEFT:
-                Intent intent1 = new Intent(MainActivity.this, EventActivity.class);
+                Intent intent1 = new Intent(EventActivity.this, PlanActivity.class);
                 startActivity(intent1);
                 break;
         }
@@ -50,5 +44,4 @@ public class MainActivity extends AppCompatActivity implements
     public void onDoubleTap() {
 
     }
-
 }
