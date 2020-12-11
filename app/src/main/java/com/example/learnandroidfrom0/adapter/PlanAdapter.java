@@ -22,7 +22,7 @@ public class PlanAdapter extends BaseAdapter {
     private int layout;
     private List<Plan> planList;
 
-    public PlanAdapter(Context context, int laout, List<Plan> planList) {
+    public PlanAdapter(Context context, int layout, List<Plan> planList) {
         this.context = context;
         this.layout = layout;
         this.planList = planList;

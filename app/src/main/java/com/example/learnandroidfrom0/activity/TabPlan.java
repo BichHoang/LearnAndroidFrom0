@@ -41,7 +41,7 @@ public class TabPlan extends Fragment {
         arrayList.add(new Plan("Ngam hoang hon", false));
         arrayList.add(new Plan("Ngam binh minh", false));
         arrayList.add(new Plan("Ngu nuong", true));
-        adapter = new PlanAdapter(container.getContext(), R.layout.plan_item, arrayList);
+        adapter = new PlanAdapter(getActivity(), R.layout.plan_item, arrayList);
         listView.setAdapter(adapter);
 
         return view;
