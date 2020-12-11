@@ -1,6 +1,5 @@
-package com.example.learnandroidfrom0;
+package com.example.learnandroidfrom0.activity;
 
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.learnandroidfrom0.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Tab2#newInstance} factory method to
+ * Use the {@link TabEvent#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Tab2 extends Fragment {
+public class TabEvent extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +26,7 @@ public class Tab2 extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Tab2() {
+    public TabEvent() {
         // Required empty public constructor
     }
 
@@ -35,11 +36,11 @@ public class Tab2 extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Tab2.
+     * @return A new instance of fragment TabEvent.
      */
     // TODO: Rename and change types and number of parameters
-    public static Tab2 newInstance(String param1, String param2) {
-        Tab2 fragment = new Tab2();
+    public static TabEvent newInstance(String param1, String param2) {
+        TabEvent fragment = new TabEvent();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,10 +61,6 @@ public class Tab2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tab2, container, false);
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
+        return inflater.inflate(R.layout.fragment_tab_event, container, false);
     }
 }

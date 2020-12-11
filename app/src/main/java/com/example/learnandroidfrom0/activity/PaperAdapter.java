@@ -1,4 +1,4 @@
-package com.example.learnandroidfrom0;
+package com.example.learnandroidfrom0.activity;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -24,14 +24,14 @@ public class PaperAdapter extends FragmentStatePagerAdapter {
         {
 
             case 0:
-                Tab1 tab1 = new Tab1();
-                return tab1;
+                TabMain tabMain = new TabMain();
+                return tabMain;
             case 1:
-                Tab2 tab2 = new Tab2();
-                return  tab2;
+                TabDiary tabDiary = new TabDiary();
+                return tabDiary;
             case 2:
-                Tab3 tab3 = new Tab3();
-                return  tab3;
+                TabPlan tabPlan = new TabPlan();
+                return tabPlan;
             default:
                 return null;
         }
